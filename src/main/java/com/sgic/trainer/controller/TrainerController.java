@@ -34,7 +34,7 @@ public class TrainerController {
 		return new ResponseEntity<>(trainerService.getAllTrainers(),HttpStatus.OK);
 	}
 	@GetMapping("/trainer/{id}")
-	public ResponseEntity<List<Trainer>>getTrainerByID(@PathVariable("id") Integer id) {
+	public ResponseEntity<Trainer>getTrainerByID(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(trainerService.getTrainerById(id),HttpStatus.OK);
 	}
 }

@@ -9,5 +9,5 @@ public interface TrainerService {
 	boolean editTrainer(Trainer trainer,Integer id);
 	List<Trainer>getAllTrainers();
 	boolean deleteTrainer(Integer id);
-	List<Trainer>getTrainerById(Integer id);
+	Trainer getTrainerById(Integer id);
 }

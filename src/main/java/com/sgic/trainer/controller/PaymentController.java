@@ -11,24 +11,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sgic.trainer.dto.PaymentSaveDto;
 import com.sgic.trainer.entity.Payment;
+import com.sgic.trainer.entity.TrainingSchedule;
+import com.sgic.trainer.maper.PaymentDtoMapper;
 import com.sgic.trainer.service.PaymentService;
+import com.sgic.trainer.service.TrainingScheduleService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
-
-	@PostMapping("/payment")
-	public HttpStatus addPaymentDetails(@RequestBody Payment payment) {
-		if (paymentService.addPaymentDetails(payment)) {
+	@Autowired 
+	private TrainingScheduleService trainingScheduleService;
+	@PostMapping("/paymentprocess")
+	public HttpStatus addPaymentDetails(@RequestBody PaymentSaveDto paymentSaveDto) {
+		if (paymentService.addPaymentDetails(PaymentDtoMapper.mapPaymentSaveDtoToPayment(paymentSaveDto),trainingScheduleService.getTrainningScheduleById(paymentSaveDto.getTrainingSchedule()))) {
 			return HttpStatus.CREATED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
 
-	@GetMapping("/payment")
+	@GetMapping("/paymentprocess")
 	public ResponseEntity<List<Payment>> getPaymentDetails() {
 		return new ResponseEntity<>(paymentService.getAllPaymentDetails(), HttpStatus.OK);
 
