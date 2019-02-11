@@ -38,13 +38,14 @@ public class StatusController {
 		return true;
 
 	}
+
 	@PutMapping("/status/{id}")
-	public HttpStatus ModifyStatus(@PathVariable Integer id,@RequestBody Status status) {
+	public HttpStatus ModifyStatus(@PathVariable Integer id, @RequestBody Status status) {
 		boolean test = statusService.editStatus(status, id);
 		if (test) {
-		return HttpStatus.ACCEPTED;
+			return HttpStatus.ACCEPTED;
 		}
 		return HttpStatus.BAD_REQUEST;
 
-		}
+	}
 }

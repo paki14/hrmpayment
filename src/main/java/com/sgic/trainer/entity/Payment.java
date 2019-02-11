@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(schema = "payment", name = "payment")
@@ -23,8 +24,9 @@ public class Payment implements Serializable {
 	private Integer id;
 	private Double amount;
 	private Date dateOfPayment;
+	@NotNull
 	private Integer invoiceNo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "trainingSchedule_id")
 	private TrainingSchedule trainingSchedule;
@@ -69,6 +71,4 @@ public class Payment implements Serializable {
 		this.trainingSchedule = trainingSchedule;
 	}
 
-	
-	
 }

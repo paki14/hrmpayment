@@ -16,14 +16,14 @@ public class PaymentEntityMapper {
 		paymentDto.setTrainingSchedule(payment.getTrainingSchedule());
 		return paymentDto;
 	}
-	
-	public static List<PaymentDto> mapPaymentListToPaymentDtoList(List<Payment> paymentList){
+
+	public static List<PaymentDto> mapPaymentListToPaymentDtoList(List<Payment> paymentList) {
 		List<PaymentDto> paymentDtoList = new ArrayList<PaymentDto>();
-		if(paymentList != null) {
+		if (paymentList != null) {
 			for (Payment payment : paymentList)
 				paymentDtoList.add(mapPaymentToPaymentDto(payment));
 		}
-		
+
 		return paymentDtoList;
 	}
 }

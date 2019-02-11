@@ -7,8 +7,12 @@ import com.sgic.trainer.entity.TrainingSchedule;
 
 public interface PaymentService {
 	boolean addPaymentDetails(Payment payment, TrainingSchedule trainingSchedule);
-	boolean editPaymentDetails(Payment payment, TrainingSchedule trainingSchedule ,Integer id);
+
+	boolean editPaymentDetails(Payment payment, TrainingSchedule trainingSchedule, Integer id);
+
 	List<Payment> getAllPaymentDetails();
+
 	boolean deleatePaymentDetails(Integer id);
 
+	Payment getPaymentByTrainingScheduleId(Integer id);
 }

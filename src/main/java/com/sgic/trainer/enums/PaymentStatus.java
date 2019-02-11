@@ -1,5 +1,5 @@
 package com.sgic.trainer.enums;
 
 public enum PaymentStatus {
-	INITIATED,PROCESSED,DEPOSITED,COMPLETED
+	INITIATED, PROCESSED, DEPOSITED, COMPLETED, NOTCOMPLETE
 }

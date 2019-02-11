@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.sgic.trainer.entity.Status;
 import com.sgic.trainer.repository.StatusRepository;
+
 @Service
-public class StatusSrviceImpl implements StatusService{
+public class StatusSrviceImpl implements StatusService {
 	@Autowired
 	private StatusRepository statusRepository;
 
@@ -38,9 +39,9 @@ public class StatusSrviceImpl implements StatusService{
 		}
 		return false;
 	}
-	
+
 	public Status getStatusById(Integer id) {
-	  Status status = statusRepository.findById(id).get();
-      return status;
+		Status status = statusRepository.findById(id).get();
+		return status;
 	}
 }

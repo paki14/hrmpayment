@@ -38,21 +38,22 @@ public class TrainingScheduleController {
 	}
 
 	@PutMapping("/payment/{id}")
-	public HttpStatus editPaymentInitiation(@RequestBody TrainingScheduleSaveDto trainingScheduleSaveDto , @PathVariable Integer id) {
+	public HttpStatus editPaymentInitiation(@RequestBody TrainingScheduleSaveDto trainingScheduleSaveDto,
+			@PathVariable Integer id) {
 		if (trainingScheduleService.updateTrainingSchedule(
 				TrainingScheduleDtoMaper.mapTrainingScheduleSaveDtoToTrainingSchedule(trainingScheduleSaveDto),
-				trainerService.getTrainerById(trainingScheduleSaveDto.getTrainer()),id)) {
+				trainerService.getTrainerById(trainingScheduleSaveDto.getTrainer()), id)) {
 			return HttpStatus.CREATED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
 
-	
 	@GetMapping("/payment")
 	public ResponseEntity<List<TrainingSchedule>> getTrainingSchedule() {
 		return new ResponseEntity<>(trainingScheduleService.getAllTrainingSchedule(), HttpStatus.OK);
 
 	}
+
 	@GetMapping("/payment/{id}")
 	public ResponseEntity<TrainingSchedule> getTrainingScheduleById(@PathVariable Integer id) {
 		return new ResponseEntity<>(trainingScheduleService.getTrainningScheduleById(id), HttpStatus.OK);
@@ -65,18 +66,29 @@ public class TrainingScheduleController {
 		if (trainingScheduleService.paymentProcesses(
 				TrainingScheduleDtoMaper.mapTrainingScheduleSaveDtoToTrainingSchedule(trainingScheduleSaveDto),
 				trainerService.getTrainerById(trainingScheduleSaveDto.getTrainer()), id)) {
-			return HttpStatus.CREATED;
+			return HttpStatus.ACCEPTED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
-	
+
 	@PutMapping("/payment/completed/{id}")
 	public HttpStatus paymentCompleted(@RequestBody TrainingScheduleSaveDto trainingScheduleSaveDto,
 			@PathVariable Integer id) {
 		if (trainingScheduleService.paymentCompleted(
 				TrainingScheduleDtoMaper.mapTrainingScheduleSaveDtoToTrainingSchedule(trainingScheduleSaveDto),
 				trainerService.getTrainerById(trainingScheduleSaveDto.getTrainer()), id)) {
-			return HttpStatus.CREATED;
+			return HttpStatus.ACCEPTED;
+		}
+		return HttpStatus.BAD_REQUEST;
+	}
+
+	@PutMapping("/payment/notcompleted/{id}")
+	public HttpStatus paymentNotComplete(@RequestBody TrainingScheduleSaveDto trainingScheduleSaveDto,
+			@PathVariable Integer id) {
+		if (trainingScheduleService.paymentNotCompleted(
+				TrainingScheduleDtoMaper.mapTrainingScheduleSaveDtoToTrainingSchedule(trainingScheduleSaveDto),
+				trainerService.getTrainerById(trainingScheduleSaveDto.getTrainer()), id)) {
+			return HttpStatus.ACCEPTED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}

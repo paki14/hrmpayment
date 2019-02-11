@@ -1,7 +1,6 @@
 package com.sgic.trainer.entity;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.sgic.trainer.enums.PaymentStatus;
 
@@ -24,16 +24,20 @@ public class TrainingSchedule implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotNull
 	private String trainingTopic;
+	@NotNull
 	private Date date;
-	private Time totalCoveredhours;
+	@NotNull
+	private Double totalCoveredhours;
 	private PaymentStatus status;
+	@NotNull
 	private Double amounToPaid;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "trainer_id")
 	private Trainer trainer;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,15 +62,14 @@ public class TrainingSchedule implements Serializable {
 		this.date = date;
 	}
 
-	public Time getTotalCoveredhours() {
+	public Double getTotalCoveredhours() {
 		return totalCoveredhours;
 	}
 
-	public void setTotalCoveredhours(Time totalCoveredhours) {
+	public void setTotalCoveredhours(Double totalCoveredhours) {
 		this.totalCoveredhours = totalCoveredhours;
 	}
 
-	
 	public PaymentStatus getStatus() {
 		return status;
 	}
@@ -90,7 +93,5 @@ public class TrainingSchedule implements Serializable {
 	public void setTrainer(Trainer trainer) {
 		this.trainer = trainer;
 	}
-
-	
 
 }

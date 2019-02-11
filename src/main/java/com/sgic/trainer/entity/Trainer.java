@@ -28,15 +28,23 @@ public class Trainer implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	private String name;
 	private String position;
 	private String specializedArea;
 	private Integer accountNo;
 	
-	public int getId() {
-		return id;
+	
+	public String getName() {
+		return name;
 	}
-	public void setId(int id) {
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Integer getId() {
+		return id;
 	}
 	public User getUser() {
 		return user;

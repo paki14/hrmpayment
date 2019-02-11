@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.sgic.trainer.entity.Trainer;
 import com.sgic.trainer.repository.TrainnerRepository;
+
 @Service
-public class TrainerServiceImpl implements TrainerService{
+public class TrainerServiceImpl implements TrainerService {
 	@Autowired
 	private TrainnerRepository trainerRepository;
+
 	@Override
 	public boolean addTrainer(Trainer trainer) {
 		trainerRepository.save(trainer);
@@ -19,7 +21,7 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public boolean editTrainer(Trainer trainer, Integer id) {
-		if(trainerRepository.getOne(id)!=null) {
+		if (trainerRepository.getOne(id) != null) {
 			trainerRepository.save(trainer);
 			return true;
 		}
@@ -33,7 +35,7 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public boolean deleteTrainer(Integer id) {
-		if(trainerRepository.getOne(id)!=null) {
+		if (trainerRepository.getOne(id) != null) {
 			trainerRepository.deleteById(id);
 			return true;
 		}
