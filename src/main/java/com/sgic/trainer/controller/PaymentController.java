@@ -24,23 +24,27 @@ import com.sgic.trainer.service.TrainingScheduleService;
 public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
-	@Autowired 
+	@Autowired
 	private TrainingScheduleService trainingScheduleService;
+
 	@PostMapping("/paymentprocess")
 	public HttpStatus addPaymentDetails(@RequestBody PaymentSaveDto paymentSaveDto) {
-		if (paymentService.addPaymentDetails(PaymentDtoMapper.mapPaymentSaveDtoToPayment(paymentSaveDto),trainingScheduleService.getTrainningScheduleById(paymentSaveDto.getTrainingSchedule()))) {
+		if (paymentService.addPaymentDetails(PaymentDtoMapper.mapPaymentSaveDtoToPayment(paymentSaveDto),
+				trainingScheduleService.getTrainningScheduleById(paymentSaveDto.getTrainingSchedule()))) {
 			return HttpStatus.CREATED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
-	
+
 	@PutMapping("/paymentprocess/{id}")
 	public HttpStatus editPayment(@RequestBody PaymentSaveDto paymentSaveDto, @PathVariable Integer id) {
-		if(paymentService.editPaymentDetails(PaymentDtoMapper.mapPaymentSaveDtoToPayment(paymentSaveDto), trainingScheduleService.getTrainningScheduleById(paymentSaveDto.getTrainingSchedule()), id)) {
+		if (paymentService.editPaymentDetails(PaymentDtoMapper.mapPaymentSaveDtoToPayment(paymentSaveDto),
+				trainingScheduleService.getTrainningScheduleById(paymentSaveDto.getTrainingSchedule()), id)) {
 			return HttpStatus.CREATED;
 		}
 		return HttpStatus.BAD_REQUEST;
 	}
+
 	@GetMapping("/paymentprocess")
 	public ResponseEntity<List<Payment>> getPaymentDetails() {
 		return new ResponseEntity<>(paymentService.getAllPaymentDetails(), HttpStatus.OK);
@@ -48,7 +52,7 @@ public class PaymentController {
 	}
 
 	@GetMapping("/paymentprocess/{id}")
-	public ResponseEntity<Payment> getPaymentByTrainingScheduleId(@PathVariable Integer id){
-		return new ResponseEntity<Payment>(paymentService.getPaymentByTrainingScheduleId(id),HttpStatus.OK);
+	public ResponseEntity<Payment> getPaymentByTrainingScheduleId(@PathVariable Integer id) {
+		return new ResponseEntity<Payment>(paymentService.getPaymentByTrainingScheduleId(id), HttpStatus.OK);
 	}
 }

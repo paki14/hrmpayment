@@ -29,6 +29,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public boolean editPaymentDetails(Payment payment, TrainingSchedule trainingSchedule, Integer id) {
 		if (paymentRepository.getOne(id) != null) {
+			trainingSchedule.setStatus(PaymentStatus.DEPOSITED);
 			payment.setTrainingSchedule(trainingSchedule);
 			paymentRepository.save(payment);
 			return true;
